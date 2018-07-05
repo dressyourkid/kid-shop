@@ -6,32 +6,62 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * Created by lconnected on 04/07/2018.
+ * Сущность - справочник размеров
  */
 @Entity
-public class Product {
+public class Size {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    /**
+     * Название размера (S, M, L и др.)
+     */
     @Column
     private String name;
 
+    /**
+     * Ширина в миллиметрах
+     */
     @Column
-    private String description;
+    private Long width;
 
+    /**
+     * Длина в миллиметрах
+     */
     @Column
-    private long size;
+    private Long height;
 
-    @Column
-    private double price;
+    public Long getId() {
+        return id;
+    }
 
-    @Column
-    private int amount;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Column
-    private double discount;
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public Long getWidth() {
+        return width;
+    }
+
+    public void setWidth(Long width) {
+        this.width = width;
+    }
+
+    public Long getHeight() {
+        return height;
+    }
+
+    public void setHeight(Long height) {
+        this.height = height;
+    }
 }

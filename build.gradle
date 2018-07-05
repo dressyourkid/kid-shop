@@ -2,6 +2,7 @@ buildscript {
 	ext {
 		ext.springBootVersion = '2.0.3.RELEASE'
 		ext.postgresqlDriverVersion = '42.1.4'
+		ext.h2DatabaseVersion = '1.4.197'
 	}
 	repositories {
 		mavenCentral()
@@ -24,11 +25,12 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.postgresql:postgresql:$postgresqlDriverVersion")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile("com.h2database:h2:$h2DatabaseVersion")
+
 }

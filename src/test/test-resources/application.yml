@@ -1,22 +1,15 @@
 server:
-  port: 8080
+  port: 8079
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/kidshop
-    username: postgres
-    password: root00
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:kidshop;DB_CLOSE_DELAY=-1
   jpa:
     show-sql: true
-    generate-ddl: true
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-    properties:
-      hibernate:
-        temp.use_jdbc_metadata_defaults: false
-        ddl-auto: update
-
-logging:
-  level:
-    org.springframework: ERROR
-    ru.testyourkid: DEBUG
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: false
+      path: /h2-console

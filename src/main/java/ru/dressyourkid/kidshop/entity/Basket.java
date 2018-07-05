@@ -1,10 +1,10 @@
 package ru.dressyourkid.kidshop.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+/**
+ * Сущность для хранения товаров в корзине
+ */
 @Entity
 public class Basket {
 
@@ -12,27 +12,14 @@ public class Basket {
     @GeneratedValue
     private Long id;
 
-    @Column
-    private String product;
+    @ManyToOne
+    private Product product;
+
+    @ManyToOne
+    private User user;
 
     @Column
-    private int amount;
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
+    private Long amount;
 
     public Long getId() {
         return id;
@@ -40,5 +27,29 @@ public class Basket {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Long getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 }

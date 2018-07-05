@@ -1,29 +1,41 @@
 package ru.dressyourkid.kidshop.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+/**
+ * Сущность для заказа
+ */
 @Entity
+@Table(name = "customer_order")
 public class Order {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column
-    private String product;
+    @ManyToOne
+    private Product product;
+
+    @ManyToOne
+    private User user;
 
     @Column
     private int amount;
 
-    public String getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getAmount() {

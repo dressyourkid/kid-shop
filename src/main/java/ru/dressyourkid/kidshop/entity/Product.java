@@ -1,12 +1,10 @@
 package ru.dressyourkid.kidshop.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
- * Created by lconnected on 04/07/2018.
+ * Сущность товара
  */
 @Entity
 public class Product {
@@ -21,17 +19,18 @@ public class Product {
     @Column
     private String description;
 
-    @Column
-    private long size;
+    @ManyToMany
+    @JoinTable(name = "ProductSizeRel")
+    private List<Size> size;
 
     @Column
-    private double price;
+    private Double price;
 
     @Column
-    private int amount;
+    private Integer amount;
 
     @Column
-    private double discount;
+    private Double discount;
 
     public Long getId() {
         return id;
@@ -57,35 +56,35 @@ public class Product {
         this.description = description;
     }
 
-    public long getSize() {
+    public List<Size> getSize() {
         return size;
     }
 
-    public void setSize(long size) {
+    public void setSize(List<Size> size) {
         this.size = size;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 }
