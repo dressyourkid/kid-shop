@@ -1,5 +1,7 @@
 package ru.dressyourkid.kidshop.entity;
 
+import org.apache.catalina.Store;
+
 import javax.persistence.*;
 
 /**
@@ -14,7 +16,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    private Product product;
+    private StoreItem storeItem;
 
     @ManyToOne
     private User user;
@@ -22,12 +24,20 @@ public class Order {
     @Column
     private int amount;
 
-    public Product getProduct() {
-        return product;
+    public Long getId() {
+        return id;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public StoreItem getStoreItem() {
+        return storeItem;
+    }
+
+    public void setStoreItem(StoreItem storeItem) {
+        this.storeItem = storeItem;
     }
 
     public User getUser() {
@@ -44,13 +54,5 @@ public class Order {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

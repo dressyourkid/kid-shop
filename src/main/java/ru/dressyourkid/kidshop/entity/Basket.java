@@ -6,6 +6,7 @@ import javax.persistence.*;
  * Сущность для хранения товаров в корзине
  */
 @Entity
+@Table(name= "customer_basket")
 public class Basket {
 
     @Id
@@ -13,10 +14,10 @@ public class Basket {
     private Long id;
 
     @ManyToOne
-    private Product product;
+    private StoreItem storeItem;
 
     @ManyToOne
-    private User user;
+    private User owner;
 
     @Column
     private Long amount;
@@ -29,20 +30,20 @@ public class Basket {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public StoreItem getStoreItem() {
+        return storeItem;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setStoreItem(StoreItem storeItem) {
+        this.storeItem = storeItem;
     }
 
-    public User getUser() {
-        return user;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public Long getAmount() {

@@ -23,15 +23,6 @@ public class Product {
     @JoinTable(name = "ProductSizeRel")
     private List<Size> size;
 
-    @Column
-    private Double price;
-
-    @Column
-    private Integer amount;
-
-    @Column
-    private Double discount;
-
     public Long getId() {
         return id;
     }
@@ -64,27 +55,4 @@ public class Product {
         this.size = size;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
 }
