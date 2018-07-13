@@ -1,7 +1,5 @@
 package ru.dressyourkid.kidshop.entity;
 
-import org.apache.catalina.Store;
-
 import javax.persistence.*;
 
 /**

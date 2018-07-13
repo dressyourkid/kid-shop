@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Сущность товара
+ * Сущность описания товара (общая информация)
  */
 @Entity
 public class Product {

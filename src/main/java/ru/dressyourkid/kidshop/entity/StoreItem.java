@@ -8,7 +8,6 @@ import java.util.List;
  * Сущность склада
  */
 @Entity
-@Table(name = "store")
 public class StoreItem {
 
     @Id
@@ -24,8 +23,12 @@ public class StoreItem {
     @ManyToOne(targetEntity = Discount.class)
     private Discount discount;
 
-    @Column
-    private BigDecimal price;
+    @Column(precision = 12, scale = 9)
+    private BigDecimal itemPrice;
+
+    public StoreItem() {
+        System.out.println("created");
+    }
 
     public Long getId() {
         return id;
@@ -59,11 +62,11 @@ public class StoreItem {
         this.discount = discount;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getItemPrice() {
+        return itemPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
     }
 }

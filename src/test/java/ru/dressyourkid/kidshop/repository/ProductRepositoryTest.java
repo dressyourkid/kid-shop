@@ -19,7 +19,6 @@ public class ProductRepositoryTest extends ApplicationTest {
         Product product = new Product();
         product.setName("product 1");
         product.setDescription("descr test");
-        product.setAmount(10);
         repository.saveAndFlush(product);
         Assert.assertTrue("Таблица не пустая", repository.count() > 0);
     }
