@@ -43,6 +43,7 @@ hs_err_pid*
 *.ipr
 .ideaDataSources
 dataSources
+classes
 
 ### NetBeans ###
 nbproject/private/
