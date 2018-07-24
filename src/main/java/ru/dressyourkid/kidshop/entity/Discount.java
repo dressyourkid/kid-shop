@@ -22,6 +22,14 @@ public class Discount {
     @Column
     private String name;
 
+    public Discount() {
+
+    }
+
+    public Discount(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

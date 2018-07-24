@@ -23,6 +23,14 @@ public class Product {
     @JoinTable(name = "ProductSizeRel")
     private List<Size> size;
 
+    public Product() {
+
+    }
+
+    public Product(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

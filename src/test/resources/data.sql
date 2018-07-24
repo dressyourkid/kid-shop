@@ -9,6 +9,9 @@ insert into product (id, name, description) values (101, 'pants awesome', 'foo b
 insert into product (id, name, description) values (102, 'body h&m', 'foo bar description');
 insert into product (id, name, description) values (103, 'baby jacket', 'foo bar description');
 
+-- 200 - 250 Users
+insert into users (id, email, first_name, last_name, social_network) values (200, 'luckykeks@gmail.com', 'Gus', 'Petrovi4', 'https://vk.com/levasfx');
+
 -- 1000 + store items
 insert into store_item (id, item_price, discount_id, product_id) values (1000, 50.05, null, 100);
 insert into store_item (id, item_price, discount_id, product_id) values (1001, 150.0, 92, 103);
