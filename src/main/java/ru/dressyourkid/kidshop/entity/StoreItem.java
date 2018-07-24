@@ -10,6 +10,10 @@ import java.util.List;
 @Entity
 public class StoreItem {
 
+    public StoreItem(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

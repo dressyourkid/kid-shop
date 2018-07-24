@@ -9,6 +9,14 @@ import java.util.List;
 @Entity
 public class Product {
 
+    public Product() {
+
+    }
+
+    public Product(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

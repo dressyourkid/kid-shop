@@ -12,6 +12,14 @@ import java.math.BigDecimal;
 @Entity
 public class Discount {
 
+    public Discount() {
+
+    }
+
+    public Discount(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

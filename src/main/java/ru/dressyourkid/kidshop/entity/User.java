@@ -9,6 +9,14 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
+    public User() {
+
+    }
+
+    public User(Long id) {
+    this.id = id;
+    }
+
     @Id
     @GeneratedValue
     private Long id;

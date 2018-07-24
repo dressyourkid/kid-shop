@@ -1,6 +1,7 @@
 package ru.dressyourkid.kidshop.repository;
 
 import org.junit.Assert;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.dressyourkid.kidshop.ApplicationTest;
 import ru.dressyourkid.kidshop.entity.Size;
@@ -12,6 +13,7 @@ public class SizeRepositoryTest extends ApplicationTest {
     @Autowired
     private SizeRepository repository;
 
+    @Test
     public void sizeCreated() {
         Size size = new Size();
         size.setName("Size M");

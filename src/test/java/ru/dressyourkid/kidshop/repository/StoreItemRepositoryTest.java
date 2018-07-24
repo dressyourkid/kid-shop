@@ -20,9 +20,9 @@ public class StoreItemRepositoryTest extends ApplicationTest {
     @Test
     public void storeItemCreated() {
         StoreItem storeItem = new StoreItem();
-        storeItem.setDiscount(new Discount());
+        storeItem.setProduct(new Product(103L));
+        storeItem.setDiscount(new Discount(92L));
         storeItem.setItemPrice(new BigDecimal(2));
-        storeItem.setProduct(new Product());
         repository.saveAndFlush(storeItem);
         Assert.assertTrue("Таблица не пустая", repository.count() > 0);
     }
