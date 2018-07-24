@@ -10,10 +10,6 @@ import java.util.List;
 @Entity
 public class StoreItem {
 
-    public StoreItem(Long id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue
     private Long id;
@@ -31,7 +27,10 @@ public class StoreItem {
     private BigDecimal itemPrice;
 
     public StoreItem() {
-        System.out.println("created");
+    }
+
+    public StoreItem(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

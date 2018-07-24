@@ -9,14 +9,6 @@ import java.util.List;
 @Entity
 public class Product {
 
-    public Product() {
-
-    }
-
-    public Product(Long id) {
-        this.id = id;
-    }
-
     @Id
     @GeneratedValue
     private Long id;
@@ -30,6 +22,14 @@ public class Product {
     @ManyToMany
     @JoinTable(name = "ProductSizeRel")
     private List<Size> size;
+
+    public Product() {
+
+    }
+
+    public Product(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

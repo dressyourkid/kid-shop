@@ -9,14 +9,6 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    public User() {
-
-    }
-
-    public User(Long id) {
-    this.id = id;
-    }
-
     @Id
     @GeneratedValue
     private Long id;
@@ -32,6 +24,14 @@ public class User {
 
     @Column
     private String socialNetwork;
+
+    public User() {
+
+    }
+
+    public User(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
