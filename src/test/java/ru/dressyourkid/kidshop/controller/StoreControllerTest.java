@@ -4,15 +4,10 @@ import org.hamcrest.Matchers;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.dressyourkid.kidshop.ApplicationTest;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -22,9 +17,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by lconnected on 11/07/2018.
  */
-@AutoConfigureMockMvc(secure = false)
-//@AutoConfigureRestDocs(outputDir = "build/generated-snippets")
-@AutoConfigureRestDocs
 public class StoreControllerTest extends ControllerDocumentedTest {
 
     @Test
@@ -47,9 +39,13 @@ public class StoreControllerTest extends ControllerDocumentedTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", Matchers.notNullValue()))
-                .andDo(document("home"));
-//                .andDo(document("home",
-//                        responseFields(fieldWithPath("itemPrice").description("Цена на указанный элемент"))));
+                .andDo(document("store-get-example"));
+//                .andDo(document("store-get-example",
+//                        responseFields(
+//                                fieldWithPath("itemPrice").description("Actual item price in russian rubles"),
+//                                fieldWithPath("variants").description("Variations of the good"),
+//                        ),
+//                        ControllerDocumentedTest.links()));
     }
 
 }

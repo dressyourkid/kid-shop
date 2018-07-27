@@ -13,3 +13,4 @@ spring:
       settings:
         trace: false
       path: /h2-console
+  jackson.serialization.indent_output: true

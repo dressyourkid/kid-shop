@@ -23,10 +23,21 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.asciidoctor.convert'
 
 asciidoctor {
-	sourceDir 'src/main/resources/docs'
+	dependsOn test
+	outputDir file('build/docs')
+	sourceDir 'src/rest-docs'
+	sources {
+		include 'index.adoc'
+	}
+	options doctype: 'book'
 	attributes \
-      'snippets': file('build/snippets')
+      'snippets': file('build/generated-snippets')
 }
+
+bootJar {
+	dependsOn asciidoctor
+}
+
 
 group = 'ru.dressyourkid'
 version = '0.0.1-SNAPSHOT'
