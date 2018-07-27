@@ -1,5 +1,8 @@
 # Kid shop
 
+## Profiles
+Use `dev` or `test` profile to up the app with `CORS` support allowed for all origins and without `CSRF`
+
 ## Unit testing
 
 To write a simple test based on spring-test application context extend the `ApplicationTest.class`  
