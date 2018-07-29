@@ -17,7 +17,12 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("list")
-    public List<ProductListItem> list() { // todo see Pageable
+    public List<ProductListItem> listItems() { // todo see Pageable
+        return productService.list();
+    }
+
+    @GetMapping
+    public List<ProductListItem> singleItem() { // todo see Pageable
         return productService.list();
     }
 

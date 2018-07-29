@@ -3,14 +3,15 @@ package ru.dressyourkid.kidshop.model;
 import java.math.BigDecimal;
 
 /**
- * DTO for product list item
+ * DTO for single product view
  */
-public class ProductListItem {
+public class ProductSingleView {
 
     private String productName;
     private BigDecimal price;
 
-    public ProductListItem(String productName, BigDecimal price) {
+
+    public ProductSingleView(String productName, BigDecimal price) {
         this.productName = productName;
         this.price = price;
     }

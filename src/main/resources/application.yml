@@ -19,6 +19,30 @@ spring:
     deserialization:
       USE_BIG_DECIMAL_FOR_FLOATS: true
 
+oauth2:
+  vk:
+    client:
+      clientId: 6645870
+      clientSecret: GBj6TPEagen96zvLwn2y
+      accessTokenUri: https://oauth.vk.com/access_token
+      userAuthorizationUri: https://oauth.vk.com/authorize
+      tokenName: access_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://api.vk.com/method/users.get?v=5.80
+  facebook:
+    client:
+      clientId: 211919022693135
+      clientSecret: d3c03209ede50b7fcc9d00bace972d66
+      accessTokenUri: https://graph.facebook.com/oauth/access_token
+      userAuthorizationUri: https://www.facebook.com/dialog/oauth
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://graph.facebook.com/me
+
 logging:
   level:
     org.springframework: ERROR
