@@ -1,27 +1,49 @@
 package ru.dressyourkid.kidshop.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * DTO for single product view
  */
 public class ProductSingleView {
 
-    private String productName;
+    private Long id;
+    private ProductInfoDto productInfo;
+    private List<DiscountDto> discounts;
+    private List<SizeDto> sizes;
     private BigDecimal price;
 
-
-    public ProductSingleView(String productName, BigDecimal price) {
-        this.productName = productName;
-        this.price = price;
+    public Long getId() {
+        return id;
     }
 
-    public String getProductName() {
-        return productName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public ProductInfoDto getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(ProductInfoDto productInfoDto) {
+        this.productInfo = productInfoDto;
+    }
+
+    public List<DiscountDto> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(List<DiscountDto> discounts) {
+        this.discounts = discounts;
+    }
+
+    public List<SizeDto> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(List<SizeDto> sizes) {
+        this.sizes = sizes;
     }
 
     public BigDecimal getPrice() {
