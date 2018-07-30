@@ -67,11 +67,12 @@ that describes the problem. The error object has the following structure:
 
 Errors will be present here
 
-[[authorization]]
+[[overview-authorization]]
+== Authorization
 Some app's rest endpoints require user authorization. Authorization implemented as Social network (SN) auth via OAuth2 protocol.
-There are two ways authorize in app:
-* `/connect/vk` auth using vk SN
-* `/connect/facebook` auth using facebook SN
+There are two ways authorize in app:  
+- `/connect/vk` auth using vk SN
+- `/connect/facebook` auth using facebook SN
 
 [[resources]]
 = Resources
