@@ -24,21 +24,15 @@ import java.util.Arrays;
 @EnableOAuth2Client
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private Filter ssoCompositeFilter;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
-                .cors().and()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
+                .cors()
                 .and().authorizeRequests()
-                .antMatchers("/login**", "/connect/**", "/error**", "/user**").permitAll()
-                .antMatchers("/**").authenticated()
-                .and().addFilterBefore(ssoCompositeFilter, BasicAuthenticationFilter.class)
-                .logout().logoutSuccessUrl("/").permitAll();
+                .antMatchers("/**").permitAll();
+
+
     }
 
     @Profile("dev")
