@@ -6,8 +6,11 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceS
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
@@ -29,12 +32,15 @@ public class OAuth2Configuration {
     @Autowired
     private OAuth2ClientContext oauth2ClientContext;
 
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
     @Bean
     public Filter ssoCompositeFilter() {
         CompositeFilter filter = new CompositeFilter();
         List<Filter> filters = new ArrayList<>();
-        filters.add(createSsoFilter("/connect/facebook", facebookDetails(), facebookResource()));
-        filters.add(createSsoFilter("/connect/vk", vkDetails(), vkResource()));
+        filters.add(createSsoFilter("/connect/facebook", facebookDetails(), facebookUserTokenServices()));
+        filters.add(createSsoFilter("/connect/vk", vkDetails(), vkUserTokenServices()));
         filter.setFilters(filters);
         return filter;
     }
@@ -52,6 +58,12 @@ public class OAuth2Configuration {
     }
 
     @Bean
+    public UserInfoTokenServices facebookUserTokenServices() {
+        // todo special services for facebook login
+        return new UserInfoTokenServices(facebookResource().getUserInfoUri(), facebookResource().getClientId());
+    }
+
+    @Bean
     @ConfigurationProperties("oauth2.vk.client")
     public AuthorizationCodeResourceDetails vkDetails() {
         return new AuthorizationCodeResourceDetails();
@@ -64,6 +76,12 @@ public class OAuth2Configuration {
     }
 
     @Bean
+    @Primary
+    public UserInfoTokenServices vkUserTokenServices() {
+        return new VkUserInfoTokenServices(vkResource().getUserInfoUri(), vkResource().getClientId());
+    }
+
+    @Bean
     public FilterRegistrationBean oauth2ClientFilterRegistration(
             OAuth2ClientContextFilter filter) {
         FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
@@ -72,14 +90,16 @@ public class OAuth2Configuration {
         return registration;
     }
 
-    private Filter createSsoFilter(String filterUrl, AuthorizationCodeResourceDetails resourceDetails, ResourceServerProperties serverProperties) {
-        OAuth2ClientAuthenticationProcessingFilter facebookOAuthFilter = new OAuth2ClientAuthenticationProcessingFilter(filterUrl);
+    private Filter createSsoFilter(String filterUrl,
+                                   AuthorizationCodeResourceDetails resourceDetails,
+                                   UserInfoTokenServices tokenServices) {
+        OAuth2ClientAuthenticationProcessingFilter ssoFilter = new OAuth2ClientAuthenticationProcessingFilter(filterUrl);
         OAuth2RestTemplate auth2RestTemplate = new OAuth2RestTemplate(resourceDetails, oauth2ClientContext);
-        facebookOAuthFilter.setRestTemplate(auth2RestTemplate);
-        UserInfoTokenServices tokenServices = new UserInfoTokenServices(serverProperties.getUserInfoUri(), resourceDetails.getClientId());
+        ssoFilter.setRestTemplate(auth2RestTemplate);
         tokenServices.setRestTemplate(auth2RestTemplate);
-        facebookOAuthFilter.setTokenServices(tokenServices);
-        return facebookOAuthFilter;
+        ssoFilter.setTokenServices(tokenServices);
+        ssoFilter.setApplicationEventPublisher(applicationEventPublisher);
+        return ssoFilter;
     }
 
 }
