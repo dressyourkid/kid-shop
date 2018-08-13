@@ -1,11 +1,9 @@
 package ru.dressyourkid.kidshop.controller;
 
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class StoreControllerTest extends ControllerDocumentedTest {
 
     @Test
-    @Ignore
+    @WithMockUser(username = "test1", roles = { "USER", "ADMIN" })
     public void createStore() throws Exception {
         mockMvc.perform(post("/store")
                 .content("{" +

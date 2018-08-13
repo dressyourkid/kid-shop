@@ -3,6 +3,8 @@ package ru.dressyourkid.kidshop.configuration.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -22,21 +24,28 @@ import java.util.Arrays;
  */
 @EnableWebSecurity
 @EnableOAuth2Client
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private Filter ssoCompositeFilter;
 
+    public static final String ROLE_ADMIN = "ADMIN";
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+//                todo need to be enabled on production mode
+//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+                .csrf().disable()
                 .cors().and()
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> response.setStatus(HttpServletResponse.SC_UNAUTHORIZED))
-                .and().authorizeRequests()
-                .antMatchers("/login**", "/connect/**", "/error**", "/user**").permitAll()
-                .antMatchers("/**").authenticated()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/login**", "/logout**", "/connect/**", "/error**", "/user**").permitAll()
+                .antMatchers(HttpMethod.GET, "/store/**", "/product/**").permitAll()
+                .anyRequest().hasAnyRole(ROLE_ADMIN)
                 .and().addFilterBefore(ssoCompositeFilter, BasicAuthenticationFilter.class)
                 .logout().logoutSuccessUrl("/").permitAll();
     }

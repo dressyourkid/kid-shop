@@ -11,7 +11,7 @@ import ru.dressyourkid.kidshop.ApplicationTest;
  * Содержит protected переменную mockMvc для выполнения запросов <br>
  * Описывает правило сохранения сгенерированной документации
  */
-@AutoConfigureMockMvc(secure = false)
+@AutoConfigureMockMvc
 @AutoConfigureRestDocs
 public class ControllerDocumentedTest extends ApplicationTest {
 
