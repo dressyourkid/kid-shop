@@ -7,8 +7,13 @@ import org.springframework.stereotype.Service;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
 import ru.dressyourkid.kidshop.entity.StoreItem;
 import ru.dressyourkid.kidshop.model.ProductInfoDto;
+import ru.dressyourkid.kidshop.model.ProductListItem;
 import ru.dressyourkid.kidshop.model.ProductSingleView;
 import ru.dressyourkid.kidshop.repository.StoreRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by lconnected on 24/07/2018.
@@ -20,10 +25,12 @@ public class ProductService {
     @Autowired
     private StoreRepository storeRepository;
 
-    public Page<StoreItem> list(Pageable pageable) {
-//        items.add(new ProductListItem("Футболка 1", new BigDecimal(49.99)));
-//        items.add(new ProductListItem("Футболка 2", new BigDecimal(99.99)));
-        return storeRepository.findAll(pageable);
+    public List<ProductListItem> findAll(Pageable pageable) {
+        Page<StoreItem> storeItems = storeRepository.findAll(pageable);
+        List<ProductListItem> productListItems = storeItems.stream().map(entity ->
+                new ProductListItem(entity.getProduct().getName(),entity.getItemPrice()))
+                .collect(Collectors.toList());
+     return productListItems;
     }
 
     public ProductSingleView fetchProduct(Long productId) throws NotFoundException {
