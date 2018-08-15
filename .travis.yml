@@ -1,6 +1,4 @@
 language: java
-install:
-  - ./gradlew bootJar
 deploy:
   provider: pages
   skip-cleanup: true
