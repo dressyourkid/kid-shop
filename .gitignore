@@ -22,7 +22,6 @@
 # Gradle
 /build/
 /target/
-gradle
 .gradle
 !gradle/wrapper/gradle-wrapper.jar
 
