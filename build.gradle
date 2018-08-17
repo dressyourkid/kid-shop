@@ -55,9 +55,9 @@ docker {
  * and pushes it to hub.docker.com
  */
 task buildDocker(type: Docker) {
-	push = true // todo enable for build
+	push = true
 	tagVersion = 'latest'
-    tag = "lconnected/${project.name}"
+    tag = "dressyourkid/${project.name}"
 	dockerfile = file('Dockerfile')
     doFirst {
         copy {
