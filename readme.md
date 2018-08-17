@@ -1,5 +1,7 @@
 # Kid shop
 
+[![Build Status](https://travis-ci.org/dressyourkid/kid-shop.svg?branch=master)](https://travis-ci.org/dressyourkid/kid-shop)
+
 ## Profiles
 Use `dev` or `test` profile to up the app with `CORS` support allowed for all origins and without `CSRF`
 
