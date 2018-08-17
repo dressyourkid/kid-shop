@@ -12,7 +12,7 @@ buildscript {
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
 		classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.3")
-
+		classpath("se.transmode.gradle:gradle-docker:1.2")
 	}
 }
 
@@ -21,6 +21,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.asciidoctor.convert'
+apply plugin: 'docker'
 
 asciidoctor {
 	dependsOn test
@@ -38,9 +39,30 @@ bootJar {
 	dependsOn asciidoctor
 }
 
+assemble {
+    dependsOn 'buildDocker'
+}
+
+/**
+ * Configuration docs available here @link https://github.com/Transmode/gradle-docker
+ */
+docker {
+    useApi false
+}
+
+/**
+ * Builds docker image, tags it as version number
+ * and pushes it to hub.docker.com
+ */
+task buildDocker(type: Docker) {
+	push = true // todo enable for build
+	tagVersion = 'latest'
+    tag = "lconnected/${project.name}"
+	dockerfile = file('Dockerfile')
+}
 
 group = 'ru.dressyourkid'
-version = '0.0.1-SNAPSHOT'
+version = '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
