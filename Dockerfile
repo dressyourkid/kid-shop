@@ -4,7 +4,7 @@ MAINTAINER Lev Khrushchev <levas1992@gmail.com>
 ENV JAR_NAME kid-shop
 
 WORKDIR /app
-ADD ./libs/${JAR_NAME}-*.jar kidshop.jar
+ADD ./${JAR_NAME}-*.jar kidshop.jar
 
 # Embed Tomcat default
 VOLUME /tmp

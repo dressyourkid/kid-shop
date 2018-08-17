@@ -59,6 +59,12 @@ task buildDocker(type: Docker) {
 	tagVersion = 'latest'
     tag = "lconnected/${project.name}"
 	dockerfile = file('Dockerfile')
+    doFirst {
+        copy {
+            from file("$project.buildDir/libs")
+            into stageDir
+        }
+    }
 }
 
 group = 'ru.dressyourkid'
