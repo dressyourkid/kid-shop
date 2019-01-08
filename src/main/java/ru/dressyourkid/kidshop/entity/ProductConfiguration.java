@@ -1,13 +1,15 @@
 package ru.dressyourkid.kidshop.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
- * Сущность описания товара (общая информация)
+ *
  */
 @Entity
-public class Product {
+public class ProductConfiguration {
 
     @Id
     @GeneratedValue
@@ -18,18 +20,6 @@ public class Product {
 
     @Column
     private String description;
-
-    @ManyToMany
-    @JoinTable(name = "ProductSizeRel")
-    private List<Size> size;
-
-    public Product() {
-
-    }
-
-    public Product(Long id) {
-        this.id = id;
-    }
 
     public Long getId() {
         return id;
@@ -54,13 +44,4 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public List<Size> getSize() {
-        return size;
-    }
-
-    public void setSize(List<Size> size) {
-        this.size = size;
-    }
-
 }

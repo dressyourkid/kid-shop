@@ -1,16 +1,23 @@
-package ru.dressyourkid.kidshop.model;
+package ru.dressyourkid.kidshop.entity;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
+import java.util.List;
 
 /**
- * DTO for single product view
+ * Сущность описания товара (общая информация)
  */
-public class ProductSingleView {
+@Entity
+public class ProductMeta {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private String description;
-    private BigDecimal price;
 
     public Long getId() {
         return id;
@@ -34,13 +41,5 @@ public class ProductSingleView {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }
