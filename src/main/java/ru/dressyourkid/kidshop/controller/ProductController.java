@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
+//    @Autowired
 //    private ProductService productService;
 
 //    @GetMapping("list")
@@ -23,10 +23,10 @@ public class ProductController {
 //    }
 
     @GetMapping("/{id}")
-    public ProductSingleView singleItem(@PathVariable(value = "id", required = true) Object xyu) throws NotFoundException { // todo see Pageable
+    public ProductSingleView singleItem(@PathVariable("id") Long productId) throws NotFoundException { // todo see Pageable
 //        return productService.fetchProduct(productId);
         ProductSingleView product = new ProductSingleView();
-        product.setId(123L);
+        product.setId(productId);
         product.setName("name one");
         product.setDescription("Very long text with product description");
         return product;
