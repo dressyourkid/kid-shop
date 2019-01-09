@@ -1,6 +1,7 @@
 package ru.dressyourkid.kidshop.controller;
 
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -17,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class StoreControllerTest extends ControllerDocumentedTest {
 
+    @Ignore
     @Test
     @WithMockUser(username = "test1", roles = { "USER", "ADMIN" })
     public void createStore() throws Exception {
@@ -31,6 +33,7 @@ public class StoreControllerTest extends ControllerDocumentedTest {
                 .andExpect(status().isCreated());
     }
 
+    @Ignore
     @Test
     public void getStore() throws Exception {
         mockMvc.perform(get("/store/1000"))

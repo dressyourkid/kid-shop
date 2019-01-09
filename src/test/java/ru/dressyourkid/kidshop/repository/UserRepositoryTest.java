@@ -19,6 +19,6 @@ public class UserRepositoryTest extends ApplicationTest {
         user.setLastName("Biber");
         user.setSocialNetwork("www.Biber.com");
         repository.saveAndFlush(user);
-        Assert.assertTrue("Таблица не пустая", repository.count() > 0);
+        Assert.assertTrue("Table is not empty", repository.count() > 0);
     }
 }
