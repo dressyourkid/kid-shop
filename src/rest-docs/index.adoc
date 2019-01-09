@@ -55,8 +55,14 @@ use of HTTP status codes.
 | `400 Bad Request`
 | The request was malformed. The response body will include an error providing further information
 
+| `401 Unauthorized`
+| When unauthorized user requests a restricted resource
+
+| `403 Not Found`
+| When authorized user has no permission to perform an action with resource
+
 | `404 Not Found`
-| The requested resource did not exist
+| The requested resource is not exist
 |===
 
 [[overview-errors]]
@@ -77,17 +83,20 @@ There are two ways authorize in app:
 [[resources]]
 = Resources
 
-[store]
-== Store
+[product]
+== Products resource
 
-=== Get single store operation
+=== Get single product
 
-.request
-include::{snippets}/store-get-example/http-request.adoc[]
+.Request
+include::{snippets}/product-single-snippet/http-request.adoc[]
 
-.curl
-include::{snippets}/store-get-example/curl-request.adoc[]
+.cURL
+include::{snippets}/product-single-snippet/curl-request.adoc[]
 
-.response
-include::{snippets}/store-get-example/http-response.adoc[]
+.Response
+include::{snippets}/product-single-snippet/http-response.adoc[]
+
+.Response fields
+include::{snippets}/product-single-snippet/response-fields.adoc[]
 
