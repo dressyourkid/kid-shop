@@ -1,16 +1,12 @@
 package ru.dressyourkid.kidshop.controller;
 
 import org.hamcrest.Matchers;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,7 +34,37 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                                 fieldWithPath("id").description("Product id"),
                                 fieldWithPath("name").description("Product name"),
                                 fieldWithPath("description").description("Product description"),
-                                fieldWithPath("price").description("Product price in Russian rubles")
+                                fieldWithPath("price").description("Product price")
+                        )));
+    }
+
+    @Test
+    public void getProductList() throws Exception {
+        mockMvc.perform(get("/product"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", Matchers.notNullValue()))
+                .andExpect(jsonPath("content", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0]", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0].id", Matchers.notNullValue()))
+                .andDo(document("product-page-snippet",
+                        responseFields(
+                                fieldWithPath("content").description("List of products"),
+                                fieldWithPath("content[].id").description("Product id"),
+                                fieldWithPath("content[].name").description("Product name"),
+                                fieldWithPath("content[].description").description("Product description"),
+                                fieldWithPath("content[].price").description("Product price"),
+                                fieldWithPath("pageable").description("wtf?"),
+                                fieldWithPath("first").description("Indicates the page is first"),
+                                fieldWithPath("last").description("Indicates the page is last"),
+                                fieldWithPath("totalPages").description("Total amount of pages"),
+                                fieldWithPath("totalElements").description("Total amount of elements"),
+                                fieldWithPath("sort").description("sort params from server"),
+                                fieldWithPath("sort.sorted").description("content is sorted"),
+                                fieldWithPath("sort.unsorted").description("content is unsorted"),
+                                fieldWithPath("numberOfElements").description("Amount of elements in current page"),
+                                fieldWithPath("size").description("wtf?"),
+                                fieldWithPath("number").description("wtf?")
                         )));
     }
 

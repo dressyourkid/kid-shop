@@ -86,6 +86,20 @@ There are two ways authorize in app:
 [product]
 == Products resource
 
+=== List of products
+
+.Request
+include::{snippets}/product-page-snippet/http-request.adoc[]
+
+.cURL
+include::{snippets}/product-page-snippet/curl-request.adoc[]
+
+.Response
+include::{snippets}/product-page-snippet/http-response.adoc[]
+
+.Response fields
+include::{snippets}/product-page-snippet/response-fields.adoc[]
+
 === Get single product
 
 .Request
