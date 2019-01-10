@@ -40,7 +40,7 @@ bootJar {
 }
 
 assemble {
-    dependsOn 'buildDocker'
+    dependsOn 'buildApplicationDockerImage', 'buildDocumentationDockerImage'
 }
 
 /**
@@ -54,7 +54,7 @@ docker {
  * Builds docker image, tags it as version number
  * and pushes it to hub.docker.com
  */
-task buildDocker(type: Docker) {
+task buildApplicationDockerImage(type: Docker) {
 	push = true
 	tagVersion = 'latest'
     tag = "dressyourkid/${project.name}"
@@ -65,6 +65,26 @@ task buildDocker(type: Docker) {
             into stageDir
         }
     }
+}
+/**
+ * Builds docker image, tags it as version number
+ * and pushes it to hub.docker.com
+ */
+task buildDocumentationDockerImage(type: Docker) {
+	push = true
+	tagVersion = 'latest'
+	tag = "dressyourkid/${project.name}-api-docs"
+	dockerfile = file('src/rest-docs/Dockerfile')
+	doFirst {
+		copy {
+			from file("src/rest-docs/nginx-conf")
+			into "$stageDir/rest-docs/nginx-conf"
+		}
+		copy {
+			from file("$project.buildDir/docs/html5")
+			into "$stageDir/rest-docs/html"
+		}
+	}
 }
 
 group = 'ru.dressyourkid'
