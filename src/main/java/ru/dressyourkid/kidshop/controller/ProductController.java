@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
 import ru.dressyourkid.kidshop.model.ProductListItem;
 import ru.dressyourkid.kidshop.model.ProductSingleView;
+import ru.dressyourkid.kidshop.service.ProductService;
 
 
 import java.math.BigDecimal;
@@ -18,8 +19,8 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-//    @Autowired
-//    private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
     public Page<ProductSingleView> listItems(Pageable pageable) { // todo see Pageable
@@ -37,13 +38,13 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductSingleView singleItem(@PathVariable("id") Long productId) throws NotFoundException { // todo see Pageable
-//        return productService.fetchProduct(productId);
-        ProductSingleView product = new ProductSingleView();
-        product.setId(productId);
-        product.setName("name one");
-        product.setDescription("Very long text with product description");
-        product.setPrice(new BigDecimal(100L));
-        return product;
+        return productService.fetchProduct(productId);
+//        ProductSingleView product = new ProductSingleView();
+//        product.setId(productId);
+//        product.setName("name one");
+//        product.setDescription("Very long text with product description");
+//        product.setPrice(new BigDecimal(100L));
+//        return product;
     }
 
 }
