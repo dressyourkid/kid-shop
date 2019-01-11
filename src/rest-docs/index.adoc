@@ -76,7 +76,8 @@ Errors will be present here
 [[overview-authorization]]
 == Authorization
 Some app's rest endpoints require user authorization. Authorization implemented as Social network (SN) auth via OAuth2 protocol.
-There are two ways authorize in app:  
+There are two ways authorize in app
+
 * `/connect/vk` auth using vk SN
 * `/connect/facebook` auth using facebook SN
 
