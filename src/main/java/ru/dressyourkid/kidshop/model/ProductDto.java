@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * DTO for single product view
  */
-public class ProductSingleView {
+public class ProductDto {
 
     private Long id;
     private String name;

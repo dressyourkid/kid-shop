@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
 import ru.dressyourkid.kidshop.entity.ProductMeta;
 import ru.dressyourkid.kidshop.entity.ProductStore;
-import ru.dressyourkid.kidshop.model.ProductSingleView;
+import ru.dressyourkid.kidshop.model.ProductDto;
 import ru.dressyourkid.kidshop.repository.ProductMetaRepository;
 import ru.dressyourkid.kidshop.repository.ProductStoreRepository;
 
@@ -27,26 +27,33 @@ public class ProductService {
     @Autowired
     private ProductStoreRepository productStoreRepository;
 
-    public Page<ProductSingleView> findPage(Pageable pageable) {
-        Page<ProductMeta> productStorePage = productMetaRepository.findAll(pageable);
-        Page<ProductSingleView> productPage = productStorePage
+    public Page<ProductDto> findPage(Pageable pageable) {
+        Page<ProductMeta> allProductsPage = productMetaRepository.findAll(pageable);
+        Page<ProductDto> productPage = allProductsPage
                 .map(entity -> convertToDto(entity));
         return productPage;
     }
 
-    public ProductSingleView fetchProduct(Long productId) throws NotFoundException {
+    public Page<ProductDto> findPageByCategory(Long categoryId, Pageable pageable) {
+        Page<ProductMeta> productsByCategory = productMetaRepository.findByCategoryId(categoryId, pageable);
+        Page<ProductDto> productPage = productsByCategory
+                .map(entity -> convertToDto(entity));
+        return productPage;
+    }
+
+    public ProductDto fetchProduct(Long productId) throws NotFoundException {
 
         ProductMeta productItem = productMetaRepository
                 .findById(productId)
                 .orElseThrow(NotFoundException::new);
 
-        ProductSingleView productSingleView = convertToDto(productItem);
-        return productSingleView;
+        ProductDto productDto = convertToDto(productItem);
+        return productDto;
 
     }
 
-    private ProductSingleView convertToDto(ProductMeta productMeta) {
-        ProductSingleView product = new ProductSingleView();
+    private ProductDto convertToDto(ProductMeta productMeta) {
+        ProductDto product = new ProductDto();
         product.setId(productMeta.getId());
         product.setName(productMeta.getName());
         product.setDescription(productMeta.getDescription());

@@ -8,24 +8,29 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
+import ru.dressyourkid.kidshop.model.CategoryDto;
 import ru.dressyourkid.kidshop.model.ProductDto;
+import ru.dressyourkid.kidshop.service.CategoryService;
 import ru.dressyourkid.kidshop.service.ProductService;
 
 @RestController
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping
-    public Page<ProductDto> listItems(Pageable pageable) { // todo see Pageable
-        return productService.findPage(pageable);
+    public Page<CategoryDto> listItems(Pageable pageable) { // todo see Pageable
+        return categoryService.findPage(pageable);
     }
 
-    @GetMapping("/{id}")
-    public ProductDto singleItem(@PathVariable("id") Long productId) throws NotFoundException { // todo see Pageable
-        return productService.fetchProduct(productId);
+    @GetMapping("/{id}/product")
+    public Page<ProductDto> productsByCategory(@PathVariable("id") Long categoryId, Pageable pageable) throws NotFoundException { // todo see Pageable
+        return productService.findPageByCategory(categoryId, pageable);
     }
 
 }

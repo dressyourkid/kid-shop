@@ -51,32 +51,33 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                 .andExpect(jsonPath("content[0]", Matchers.notNullValue()))
                 .andExpect(jsonPath("content[0].id", Matchers.notNullValue()))
                 .andDo(document("product-page-snippet",
-                        responseFields(
+                        this.pageableSnippet.and(
                                 fieldWithPath("content").description("List of products"),
                                 fieldWithPath("content[].id").description("Product id"),
                                 fieldWithPath("content[].name").description("Product name"),
                                 fieldWithPath("content[].description").description("Product description"),
-                                fieldWithPath("content[].price").description("Product price"),
-                                fieldWithPath("content[].exists").description("Product exists in the store"),
-                                fieldWithPath("pageable").description("Common information about the requested page"),
-                                fieldWithPath("pageable.sort").description("see below"),
-                                fieldWithPath("pageable.sort.sorted").description("see below"),
-                                fieldWithPath("pageable.sort.unsorted").description("see below"),
-                                fieldWithPath("pageable.offset").description("The offset"),
-                                fieldWithPath("pageable.pageSize").description("Size of page"),
-                                fieldWithPath("pageable.pageNumber").description("Number of current page in request"),
-                                fieldWithPath("pageable.paged").description("is paged"),
-                                fieldWithPath("pageable.unpaged").description("is not paged"),
-                                fieldWithPath("first").description("Indicates the page is first"),
-                                fieldWithPath("last").description("Indicates the page is last"),
-                                fieldWithPath("totalPages").description("Total amount of pages"),
-                                fieldWithPath("totalElements").description("Total amount of elements"),
-                                fieldWithPath("sort").description("sort params from server"),
-                                fieldWithPath("sort.sorted").description("content is sorted"),
-                                fieldWithPath("sort.unsorted").description("content is unsorted"),
-                                fieldWithPath("numberOfElements").description("Amount of elements in current page"),
-                                fieldWithPath("size").description("wtf?"),
-                                fieldWithPath("number").description("wtf?")
+                                fieldWithPath("content[].price").optional().description("Product price"),
+                                fieldWithPath("content[].exists").optional().description("Product exists in the store")
+                        )));
+    }
+
+    @Test
+    public void findProductsByCategory() throws Exception {
+        mockMvc.perform(get("/category/2000/product"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", Matchers.notNullValue()))
+                .andExpect(jsonPath("content", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0]", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0].id", Matchers.notNullValue()))
+                .andDo(document("products-by-category-page-snippet",
+                        this.pageableSnippet.and(
+                                fieldWithPath("content").description("List of products"),
+                                fieldWithPath("content[].id").description("Product id"),
+                                fieldWithPath("content[].name").description("Product name"),
+                                fieldWithPath("content[].description").description("Product description"),
+                                fieldWithPath("content[].price").optional().description("Product price"),
+                                fieldWithPath("content[].exists").optional().description("Product exists in the store")
                         )));
     }
 

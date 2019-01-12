@@ -85,7 +85,7 @@ There are two ways authorize in app
 = Resources
 
 [product]
-== Products resource
+== Products
 
 === List of products
 
@@ -114,4 +114,39 @@ include::{snippets}/product-single-snippet/http-response.adoc[]
 
 .Response fields
 include::{snippets}/product-single-snippet/response-fields.adoc[]
+
+=== Products of category
+
+Request pattern is `/category/{categoryId}/product`
+Will return all the products of requested category
+
+.Request
+include::{snippets}/products-by-category-page-snippet/http-request.adoc[]
+
+.cURL
+include::{snippets}/products-by-category-page-snippet/curl-request.adoc[]
+
+.Response
+include::{snippets}/products-by-category-page-snippet/http-response.adoc[]
+
+.Response fields
+include::{snippets}/products-by-category-page-snippet/response-fields.adoc[]
+
+[category]
+== Categories
+
+=== All categories
+
+.Request
+include::{snippets}/category-all-page-snippet/http-request.adoc[]
+
+.cURL
+include::{snippets}/category-all-page-snippet/curl-request.adoc[]
+
+.Response
+include::{snippets}/category-all-page-snippet/http-response.adoc[]
+
+.Response fields
+include::{snippets}/category-all-page-snippet/response-fields.adoc[]
+
 

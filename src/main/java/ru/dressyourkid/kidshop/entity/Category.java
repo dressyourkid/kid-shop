@@ -1,13 +1,12 @@
 package ru.dressyourkid.kidshop.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Сущность описания товара (общая информация)
  */
 @Entity
-public class ProductMeta {
+public class Category {
 
     @Id
     @GeneratedValue
@@ -17,10 +16,10 @@ public class ProductMeta {
     private String name;
 
     @Column
-    private String description;
+    private String icon;
 
-    @ManyToOne
-    private Category category;
+    @ManyToOne(targetEntity = Category.class)
+    private String parent;
 
     public Long getId() {
         return id;
@@ -38,19 +37,19 @@ public class ProductMeta {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getParent() {
+        return parent;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setParent(String parent) {
+        this.parent = parent;
     }
 }

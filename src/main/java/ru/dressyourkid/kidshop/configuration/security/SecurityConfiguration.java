@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/login**", "/logout**", "/connect/**", "/error**", "/user**").permitAll()
-                .antMatchers(HttpMethod.GET, "/store/**", "/product/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/category/**", "/product/**").permitAll()
                 .anyRequest().hasAnyRole(ROLE_ADMIN)
                 .and().addFilterBefore(ssoCompositeFilter, BasicAuthenticationFilter.class)
                 .logout().logoutSuccessUrl("/").permitAll();
