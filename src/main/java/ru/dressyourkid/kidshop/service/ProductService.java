@@ -28,16 +28,9 @@ public class ProductService {
     private ProductStoreRepository productStoreRepository;
 
     public Page<ProductSingleView> findPage(Pageable pageable) {
-        Page<ProductStore> productStorePage = productStoreRepository.findAll(pageable);
+        Page<ProductMeta> productStorePage = productMetaRepository.findAll(pageable);
         Page<ProductSingleView> productPage = productStorePage
-                .map(entity -> {
-                    ProductSingleView product = new ProductSingleView();
-                    product.setId(entity.getId());
-                    product.setName(entity.getProductMeta().getName());
-                    product.setDescription(entity.getProductMeta().getDescription());
-                    product.setPrice(entity.getPrice());
-                    return product;
-                });
+                .map(entity -> convertToDto(entity));
         return productPage;
     }
 
@@ -48,11 +41,6 @@ public class ProductService {
                 .orElseThrow(NotFoundException::new);
 
         ProductSingleView productSingleView = convertToDto(productItem);
-        List<ProductStore> productStores = productStoreRepository.findByProductMetaId(productId).orElse(Collections.emptyList());
-
-        Optional<ProductStore> firstProductStore = productStores.stream().findFirst();
-        productSingleView.setExists(firstProductStore.isPresent());
-        productSingleView.setPrice(firstProductStore.map(ProductStore::getPrice).orElse(null));
         return productSingleView;
 
     }
@@ -62,6 +50,12 @@ public class ProductService {
         product.setId(productMeta.getId());
         product.setName(productMeta.getName());
         product.setDescription(productMeta.getDescription());
+
+        List<ProductStore> productStores = productStoreRepository.findByProductMetaId(product.getId()).orElse(Collections.emptyList());
+
+        Optional<ProductStore> firstProductStore = productStores.stream().findFirst();
+        product.setExists(firstProductStore.isPresent());
+        product.setPrice(firstProductStore.map(ProductStore::getPrice).orElse(null));
         return product;
     }
 
