@@ -11,6 +11,7 @@ public class ProductSingleView {
     private String name;
     private String description;
     private BigDecimal price;
+    private Boolean exists;
 
     public Long getId() {
         return id;
@@ -42,5 +43,13 @@ public class ProductSingleView {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Boolean getExists() {
+        return exists;
+    }
+
+    public void setExists(Boolean exists) {
+        this.exists = exists;
     }
 }

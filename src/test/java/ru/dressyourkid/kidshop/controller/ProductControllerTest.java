@@ -18,15 +18,17 @@ public class ProductControllerTest extends ControllerDocumentedTest {
 
     @Test
     public void getProduct() throws Exception {
-        mockMvc.perform(get("/product/1000"))
+        mockMvc.perform(get("/product/100"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", Matchers.notNullValue()))
                 .andExpect(jsonPath("id", Matchers.notNullValue()))
-                .andExpect(jsonPath("id", Matchers.equalTo(1000)))
+                .andExpect(jsonPath("id", Matchers.equalTo(100)))
                 .andExpect(jsonPath("name", Matchers.notNullValue()))
                 .andExpect(jsonPath("description", Matchers.notNullValue()))
                 .andExpect(jsonPath("price", Matchers.notNullValue()))
+                .andExpect(jsonPath("exists", Matchers.notNullValue()))
+
 //                .andDo(document("product-single-snippet"));
 
                 .andDo(document("product-single-snippet",
@@ -34,7 +36,8 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                                 fieldWithPath("id").description("Product id"),
                                 fieldWithPath("name").description("Product name"),
                                 fieldWithPath("description").description("Product description"),
-                                fieldWithPath("price").description("Product price")
+                                fieldWithPath("price").description("Product price"),
+                                fieldWithPath("exists").description("Product exists in the store")
                         )));
     }
 
@@ -54,6 +57,7 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                                 fieldWithPath("content[].name").description("Product name"),
                                 fieldWithPath("content[].description").description("Product description"),
                                 fieldWithPath("content[].price").description("Product price"),
+                                fieldWithPath("content[].exists").description("Product exists in the store"),
                                 fieldWithPath("pageable").description("Common information about the requested page"),
                                 fieldWithPath("pageable.sort").description("see below"),
                                 fieldWithPath("pageable.sort.sorted").description("see below"),
