@@ -20,7 +20,7 @@ public class ProductStore {
     @ManyToOne(targetEntity = Discount.class)
     private Discount discount;
 
-    @Column(precision = 12, scale = 9)
+    @Column(precision = 12, scale = 2)
     private BigDecimal price;
 
     public ProductStore() {

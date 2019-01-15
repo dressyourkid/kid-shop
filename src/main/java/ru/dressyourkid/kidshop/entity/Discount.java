@@ -16,7 +16,7 @@ public class Discount {
     @GeneratedValue
     private Long id;
 
-    @Column(precision = 12, scale = 9)
+    @Column(precision = 12, scale = 2)
     private BigDecimal percentage;
 
     @Column
