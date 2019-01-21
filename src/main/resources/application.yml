@@ -30,7 +30,7 @@ oauth2:
       authenticationScheme: query
       clientAuthenticationScheme: form
     resource:
-      userInfoUri: https://api.vk.com/method/users.get?v=5.80
+      userInfoUri: https://api.vk.com/method/users.get?v=5.92
   facebook:
     client:
       clientId: 211919022693135
