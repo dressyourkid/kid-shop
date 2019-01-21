@@ -81,8 +81,34 @@ There are two ways authorize in app
 * `/connect/vk` auth using vk SN
 * `/connect/facebook` auth using facebook SN
 
+These endpoints receives `redirect_uri` as request param. `redirect_uri` must be trusted url of application's oauth2 callback which you want authorize
+
 [[resources]]
 = Resources
+
+== Pagination
+
+To work with pagination use following request params
+|===
+| Parameter | Type | Default value | Description
+
+| page
+| number
+| 0
+| Number of requested page. Starts from 0.
+
+| size
+| number
+| 20
+| Maximum items per page.
+
+|===
+
+Exaplmes
+
+* `/product?page=0&size=10` returns first 10 products
+* `/product?page=1&size=10` returns next 10 products
+
 
 [product]
 == Products
