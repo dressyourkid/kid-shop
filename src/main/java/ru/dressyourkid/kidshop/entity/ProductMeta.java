@@ -7,13 +7,16 @@ import java.util.List;
  * Сущность описания товара (общая информация)
  */
 @Entity
+@Table(indexes = {
+        @Index(name = "search_index", columnList = "name,description")
+})
 public class ProductMeta {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column()
     private String name;
 
     @Column

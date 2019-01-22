@@ -81,4 +81,16 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                         )));
     }
 
+    @Test
+    public void searchProducts() throws Exception {
+        mockMvc.perform(get("/product?search=apple"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", Matchers.notNullValue()))
+                .andExpect(jsonPath("content", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0]", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0].id", Matchers.notNullValue()))
+                .andExpect(jsonPath("content[0].name", Matchers.containsString("apple")));
+    }
+
 }

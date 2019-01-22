@@ -34,6 +34,13 @@ public class ProductService {
         return productPage;
     }
 
+    public Page<ProductDto> findPage(Pageable pageable, String searchString) {
+        Page<ProductMeta> allProductsPage = productMetaRepository.findBySearchString(searchString, pageable);
+        Page<ProductDto> productPage = allProductsPage
+                .map(entity -> convertToDto(entity));
+        return productPage;
+    }
+
     public Page<ProductDto> findPageByCategory(Long categoryId, Pageable pageable) {
         Page<ProductMeta> productsByCategory = productMetaRepository.findByCategoryId(categoryId, pageable);
         Page<ProductDto> productPage = productsByCategory

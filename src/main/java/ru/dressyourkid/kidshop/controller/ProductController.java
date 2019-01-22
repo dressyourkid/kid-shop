@@ -3,10 +3,7 @@ package ru.dressyourkid.kidshop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
 import ru.dressyourkid.kidshop.model.ProductDto;
 import ru.dressyourkid.kidshop.service.ProductService;
@@ -19,8 +16,14 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public Page<ProductDto> listItems(Pageable pageable) { // todo see Pageable
-        return productService.findPage(pageable);
+    public Page<ProductDto> listItems(Pageable pageable, @RequestParam(value = "search", required = false) String searchString) { // todo see Pageable
+        Page<ProductDto> results;
+        if (searchString != null) {
+            results = productService.findPage(pageable, searchString);
+        } else {
+            results = productService.findPage(pageable);
+        }
+        return results;
     }
 
     @GetMapping("/{id}")

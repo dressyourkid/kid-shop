@@ -115,6 +115,10 @@ Exaplmes
 
 === List of products
 
+.Params
+* `search` - search string to make global search by `name` and `description`
+* pagination params. See <<Pagination>>.
+
 .Request
 include::{snippets}/product-page-snippet/http-request.adoc[]
 
