@@ -1,7 +1,6 @@
 package ru.dressyourkid.kidshop.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.tools.javac.util.List;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import ru.dressyourkid.kidshop.model.ProductCreateDto;
+
+import java.util.Arrays;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -118,7 +119,7 @@ public class ProductControllerTest extends ControllerDocumentedTest {
         productCreateDto.setName("Test");
         productCreateDto.setDescription("Test description");
         productCreateDto.setAmount(2L);
-        productCreateDto.setImageUrlList(List.of("http://foo.bar/1.png", "http://foo.bar/323.png"));
+        productCreateDto.setImageUrlList(Arrays.asList("http://foo.bar/1.png", "http://foo.bar/323.png"));
 
 
         mockMvc.perform(
