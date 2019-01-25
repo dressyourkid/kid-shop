@@ -35,4 +35,11 @@ public class ProductImage {
         this.imageUrl = imageUrl;
     }
 
+    public ProductMeta getProductMeta() {
+        return productMeta;
+    }
+
+    public void setProductMeta(ProductMeta productMeta) {
+        this.productMeta = productMeta;
+    }
 }

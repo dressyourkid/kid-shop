@@ -118,6 +118,7 @@ public class ProductService {
                     .map((image) -> {
                         ProductImage productImage = new ProductImage();
                         productImage.setImageUrl(image);
+                        productImage.setProductMeta(productMeta);
                         return productImage;
                     })
                     .collect(Collectors.toList());
