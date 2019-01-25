@@ -29,6 +29,9 @@ public class ProductMeta {
     @OneToMany(mappedBy = "productMeta", cascade = CascadeType.PERSIST)
     private List<ProductImage> productImage;
 
+    @OneToMany(mappedBy = "productMeta", cascade = CascadeType.PERSIST)
+    private List<ProductStore> productStores;
+
     public Long getId() {
         return id;
     }
@@ -67,5 +70,13 @@ public class ProductMeta {
 
     public void setProductImage(List<ProductImage> productImage) {
         this.productImage = productImage;
+    }
+
+    public List<ProductStore> getProductStores() {
+        return productStores;
+    }
+
+    public void setProductStores(List<ProductStore> productStores) {
+        this.productStores = productStores;
     }
 }

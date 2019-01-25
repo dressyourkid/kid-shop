@@ -14,7 +14,8 @@ public class ProductStore {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(targetEntity = ProductMeta.class)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private ProductMeta productMeta;
 
     @ManyToOne(targetEntity = Discount.class)

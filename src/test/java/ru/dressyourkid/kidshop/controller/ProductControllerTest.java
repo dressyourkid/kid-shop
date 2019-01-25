@@ -1,12 +1,20 @@
 package ru.dressyourkid.kidshop.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.tools.javac.util.List;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import ru.dressyourkid.kidshop.model.ProductCreateDto;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,6 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by lconnected on 11/07/2018.
  */
 public class ProductControllerTest extends ControllerDocumentedTest {
+
+    @Qualifier("objectMapper")
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     public void getProduct() throws Exception {
@@ -37,7 +49,9 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                                 fieldWithPath("name").description("Product name"),
                                 fieldWithPath("description").description("Product description"),
                                 fieldWithPath("price").description("Product price"),
-                                fieldWithPath("exists").description("Product exists in the store")
+                                fieldWithPath("exists").description("Product exists in the store"),
+                                fieldWithPath("imageUrlList").description("All product image urls"),
+                                fieldWithPath("mainImageUrl").description("Product's main image to display")
                         )));
     }
 
@@ -57,7 +71,9 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                                 fieldWithPath("content[].name").description("Product name"),
                                 fieldWithPath("content[].description").description("Product description"),
                                 fieldWithPath("content[].price").optional().description("Product price"),
-                                fieldWithPath("content[].exists").optional().description("Product exists in the store")
+                                fieldWithPath("content[].exists").optional().description("Product exists in the store"),
+                                fieldWithPath("content[].imageUrlList").description("All product image urls"),
+                                fieldWithPath("content[].mainImageUrl").description("Product's main image to display")
                         )));
     }
 
@@ -77,7 +93,9 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                                 fieldWithPath("content[].name").description("Product name"),
                                 fieldWithPath("content[].description").description("Product description"),
                                 fieldWithPath("content[].price").optional().description("Product price"),
-                                fieldWithPath("content[].exists").optional().description("Product exists in the store")
+                                fieldWithPath("content[].exists").optional().description("Product exists in the store"),
+                                fieldWithPath("content[].imageUrlList").description("All product image urls"),
+                                fieldWithPath("content[].mainImageUrl").description("Product's main image to display")
                         )));
     }
 
@@ -92,5 +110,28 @@ public class ProductControllerTest extends ControllerDocumentedTest {
                 .andExpect(jsonPath("content[0].id", Matchers.notNullValue()))
                 .andExpect(jsonPath("content[0].name", Matchers.containsString("apple")));
     }
+
+    @Test
+    @WithMockUser(username = "test1", roles = { "USER", "ADMIN" })
+    public void addProduct() throws Exception {
+        ProductCreateDto productCreateDto = new ProductCreateDto();
+        productCreateDto.setName("Test");
+        productCreateDto.setDescription("Test description");
+        productCreateDto.setAmount(2L);
+        productCreateDto.setImageUrlList(List.of("http://foo.bar/1.png", "http://foo.bar/323.png"));
+
+
+        mockMvc.perform(
+            post("/product")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(productCreateDto))
+        )
+            .andDo(print())
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$", Matchers.notNullValue()))
+            .andExpect(jsonPath("mainImageUrl", Matchers.notNullValue()));
+        // fixme weak checks
+    }
+
 
 }
