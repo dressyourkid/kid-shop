@@ -118,6 +118,7 @@ public class ProductControllerTest extends ControllerDocumentedTest {
         ProductCreateDto productCreateDto = new ProductCreateDto();
         productCreateDto.setName("Test");
         productCreateDto.setDescription("Test description");
+        productCreateDto.setCategoryId(2002L);
         productCreateDto.setAmount(2L);
         productCreateDto.setImageUrlList(Arrays.asList("http://foo.bar/1.png", "http://foo.bar/323.png"));
 

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
+import ru.dressyourkid.kidshop.entity.Category;
 import ru.dressyourkid.kidshop.entity.ProductImage;
 import ru.dressyourkid.kidshop.entity.ProductMeta;
 import ru.dressyourkid.kidshop.entity.ProductStore;
@@ -108,7 +109,7 @@ public class ProductService {
         }
 
         // 3. add to category
-
+        productMeta.setCategory(new Category(productDto.getCategoryId()));
 
         // 4. add images
         if (!CollectionUtils.isEmpty(productDto.getImageUrlList())) {

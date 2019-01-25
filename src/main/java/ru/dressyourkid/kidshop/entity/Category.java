@@ -21,6 +21,13 @@ public class Category {
     @ManyToOne(targetEntity = Category.class)
     private String parent;
 
+    public Category() {
+    }
+
+    public Category(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
