@@ -11,7 +11,7 @@ public interface ProductMetaRepository extends JpaRepository<ProductMeta, Long> 
 
     @Query("select products " +
             "from ProductMeta products " +
-            "where lower(products.name) like lower(concat('%', ?1,'%')) " +
-            "or lower(products.description) like lower(concat('%', ?1,'%'))")
+            "where lower(products.name) like concat(lower(?1),'%') " +
+            "or lower(products.description) like concat(lower(?1),'%')")
     Page<ProductMeta> findBySearchString(String searchString, Pageable pageable);
 }

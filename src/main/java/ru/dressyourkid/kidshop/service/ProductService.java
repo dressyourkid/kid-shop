@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.dressyourkid.kidshop.controller.exception.NotFoundException;
+import ru.dressyourkid.kidshop.entity.ProductImage;
 import ru.dressyourkid.kidshop.entity.ProductMeta;
 import ru.dressyourkid.kidshop.entity.ProductStore;
 import ru.dressyourkid.kidshop.model.ProductDto;
@@ -14,6 +15,7 @@ import ru.dressyourkid.kidshop.repository.ProductStoreRepository;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by lconnected on 24/07/2018.
@@ -70,6 +72,13 @@ public class ProductService {
         Optional<ProductStore> firstProductStore = productStores.stream().findFirst();
         product.setExists(firstProductStore.isPresent());
         product.setPrice(firstProductStore.map(ProductStore::getPrice).orElse(null));
+        product.setImageUrlList(
+                productMeta.getProductImage()
+                    .stream()
+                    .map(ProductImage::getImageUrl)
+                    .collect(Collectors.toList())
+        );
+        product.setMainImageUrl(product.getImageUrlList().stream().findFirst().orElse(null));
         return product;
     }
 

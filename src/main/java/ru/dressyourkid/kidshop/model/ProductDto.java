@@ -1,6 +1,7 @@
 package ru.dressyourkid.kidshop.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * DTO for single product view
@@ -12,6 +13,8 @@ public class ProductDto {
     private String description;
     private BigDecimal price;
     private Boolean exists;
+    private List<String> imageUrlList;
+    private String mainImageUrl;
 
     public Long getId() {
         return id;
@@ -51,5 +54,21 @@ public class ProductDto {
 
     public void setExists(Boolean exists) {
         this.exists = exists;
+    }
+
+    public List<String> getImageUrlList() {
+        return imageUrlList;
+    }
+
+    public void setImageUrlList(List<String> imageUrlList) {
+        this.imageUrlList = imageUrlList;
+    }
+
+    public String getMainImageUrl() {
+        return mainImageUrl;
+    }
+
+    public void setMainImageUrl(String mainImageUrl) {
+        this.mainImageUrl = mainImageUrl;
     }
 }

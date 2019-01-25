@@ -1,5 +1,7 @@
 package ru.dressyourkid.kidshop.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,23 +9,25 @@ import java.util.List;
  * Сущность описания товара (общая информация)
  */
 @Entity
-@Table(indexes = {
-        @Index(name = "search_index", columnList = "name,description")
-})
 public class ProductMeta {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column()
+    @Column
     private String name;
 
-    @Column
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
+    @Column(length = 2000)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Category.class)
     private Category category;
+
+    @OneToMany(mappedBy = "productMeta", cascade = CascadeType.PERSIST)
+    private List<ProductImage> productImage;
 
     public Long getId() {
         return id;
@@ -55,5 +59,13 @@ public class ProductMeta {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<ProductImage> getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(List<ProductImage> productImage) {
+        this.productImage = productImage;
     }
 }
