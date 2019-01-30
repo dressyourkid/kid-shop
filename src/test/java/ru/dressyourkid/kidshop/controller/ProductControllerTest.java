@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 public class ProductControllerTest extends ControllerDocumentedTest {
 
-    @Qualifier("objectMapper")
+
     @Autowired
     private ObjectMapper objectMapper;
 

@@ -26,6 +26,7 @@ public class ControllerDocumentedTest extends ApplicationTest {
             fieldWithPath("pageable").description("Common information about the requested page"),
             fieldWithPath("pageable.sort").description("see below"),
             fieldWithPath("pageable.sort.sorted").description("see below"),
+            fieldWithPath("pageable.sort.empty").description("sort is absent"),
             fieldWithPath("pageable.sort.unsorted").description("see below"),
             fieldWithPath("pageable.offset").description("The offset"),
             fieldWithPath("pageable.pageSize").description("Size of page"),
@@ -38,10 +39,12 @@ public class ControllerDocumentedTest extends ApplicationTest {
             fieldWithPath("totalElements").description("Total amount of elements"),
             fieldWithPath("sort").description("sort params from server"),
             fieldWithPath("sort.sorted").description("content is sorted"),
+            fieldWithPath("sort.empty").description("sort is absent"),
             fieldWithPath("sort.unsorted").description("content is unsorted"),
             fieldWithPath("numberOfElements").description("Amount of elements in current page"),
             fieldWithPath("size").description("wtf?"),
-            fieldWithPath("number").description("wtf?")
+            fieldWithPath("number").description("wtf?"),
+            fieldWithPath("empty").description("page has no data")
         );
 
 }
