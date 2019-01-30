@@ -179,4 +179,22 @@ include::{snippets}/category-all-page-snippet/http-response.adoc[]
 .Response fields
 include::{snippets}/category-all-page-snippet/response-fields.adoc[]
 
+[upload]
+== Media upload
+
+=== Single image upload
+
+Uploads singe image to cloud via posting `multipart/form-data`, responds with links.
+
+.Request
+include::{snippets}/upload-single-snippet/http-request.adoc[]
+
+.cURL
+include::{snippets}/upload-single-snippet/curl-request.adoc[]
+
+.Response
+include::{snippets}/upload-single-snippet/http-response.adoc[]
+
+.Response fields
+include::{snippets}/upload-single-snippet/response-fields.adoc[]
 

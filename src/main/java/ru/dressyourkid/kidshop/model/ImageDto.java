@@ -1,22 +1,19 @@
 package ru.dressyourkid.kidshop.model;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 /**
  * DTO for single image
  */
 public class ImageDto {
 
     private String url;
-    private String secure_url;
+    private String secureUrl;
 
     public ImageDto() {
     }
 
-    public ImageDto(String url, String secure_url) {
+    public ImageDto(String url, String secureUrl) {
         this.url = url;
-        this.secure_url = secure_url;
+        this.secureUrl = secureUrl;
     }
 
     public String getUrl() {
@@ -27,11 +24,11 @@ public class ImageDto {
         this.url = url;
     }
 
-    public String getSecure_url() {
-        return secure_url;
+    public String getSecureUrl() {
+        return secureUrl;
     }
 
-    public void setSecure_url(String secure_url) {
-        this.secure_url = secure_url;
+    public void setSecureUrl(String secureUrl) {
+        this.secureUrl = secureUrl;
     }
 }
