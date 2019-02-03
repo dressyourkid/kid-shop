@@ -145,6 +145,28 @@ include::{snippets}/product-single-snippet/http-response.adoc[]
 .Response fields
 include::{snippets}/product-single-snippet/response-fields.adoc[]
 
+=== Create product(s)
+
+Create new product(s) in backend.
+
+.Request
+include::{snippets}/product-create-payload-snippet/http-request.adoc[]
+
+.cURL
+include::{snippets}/product-create-payload-snippet/curl-request.adoc[]
+
+.Request payload
+include::{snippets}/product-create-payload-snippet/request-fields.adoc[]
+
+.Example
+include::{snippets}/product-create-payload-snippet/request-body.adoc[]
+
+.Response
+include::{snippets}/product-create-payload-snippet/http-response.adoc[]
+
+//.Response fields
+//include::{snippets}/product-create-payload-snippet/response-fields.adoc[]
+
 === Products of category
 
 Request pattern is `/category/{categoryId}/product`

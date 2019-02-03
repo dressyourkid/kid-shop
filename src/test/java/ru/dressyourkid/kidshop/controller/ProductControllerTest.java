@@ -13,7 +13,10 @@ import java.util.Arrays;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -131,7 +134,19 @@ public class ProductControllerTest extends ControllerDocumentedTest {
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$", Matchers.notNullValue()))
-            .andExpect(jsonPath("mainImageUrl", Matchers.notNullValue()));
+            .andExpect(jsonPath("mainImageUrl", Matchers.notNullValue()))
+            .andDo(document("product-create-payload-snippet", requestFields(
+                    fieldWithPath("id").ignored(),
+                    fieldWithPath("name").description("Product name"),
+                    fieldWithPath("description").description("Product description"),
+                    fieldWithPath("categoryId").description("Id of product category"),
+                    fieldWithPath("amount").description("Product's amount"),
+                    fieldWithPath("price").description("Product's price"),
+                    fieldWithPath("imageUrlList").description("List of urls with this product images"),
+                    fieldWithPath("mainImageUrl").description("Url of main product image")
+            )));
+//        fieldWithPath("content").description("List of products"),
+
         // fixme weak checks
     }
 
