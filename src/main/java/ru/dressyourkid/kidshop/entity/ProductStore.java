@@ -26,7 +26,7 @@ public class ProductStore {
     private BigDecimal price;
 
     @Column(nullable = false)
-    private ProductStoreStatus status;
+    private ProductStoreStatus storeStatus;
 
     public ProductStore() {
     }
@@ -67,11 +67,11 @@ public class ProductStore {
         this.price = price;
     }
 
-    public ProductStoreStatus getStatus() {
-        return status;
+    public ProductStoreStatus getStoreStatus() {
+        return storeStatus;
     }
 
-    public void setStatus(ProductStoreStatus status) {
-        this.status = status;
+    public void setStoreStatus(ProductStoreStatus storeStatus) {
+        this.storeStatus = storeStatus;
     }
 }

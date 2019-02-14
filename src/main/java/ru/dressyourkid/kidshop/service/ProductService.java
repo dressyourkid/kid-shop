@@ -18,9 +18,7 @@ import ru.dressyourkid.kidshop.repository.ProductStoreRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -78,7 +76,7 @@ public class ProductService {
 
         List<ProductStore> freeProductStores = productStores
                 .stream()
-                .filter((store) -> store.getStatus() == ProductStoreStatus.FREE)
+                .filter((store) -> store.getStoreStatus() == ProductStoreStatus.FREE)
                 .collect(Collectors.toList());
         boolean hasFreeStoreItems = freeProductStores.size() > 0;
         product.setExists(hasFreeStoreItems);
@@ -110,7 +108,7 @@ public class ProductService {
                 ProductStore productStore = new ProductStore();
                 productStore.setPrice(productDto.getPrice());
                 productStore.setProductMeta(productMeta);
-                productStore.setStatus(ProductStoreStatus.FREE);
+                productStore.setStoreStatus(ProductStoreStatus.FREE);
                 stores.add(productStore);
             }
             productMeta.setProductStores(stores);
@@ -131,7 +129,7 @@ public class ProductService {
                     })
                     .collect(Collectors.toList());
             productMeta.setProductImage(productImages);
-        }
+        } // todo handle mainImageUrl
 
         // 5. persist
         ProductMeta persistentProductMeta = productMetaRepository.save(productMeta);

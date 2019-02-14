@@ -4,19 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import ru.dressyourkid.kidshop.model.ProductCreateDto;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -123,8 +119,9 @@ public class ProductControllerTest extends ControllerDocumentedTest {
         productCreateDto.setDescription("Test description");
         productCreateDto.setCategoryId(2002L);
         productCreateDto.setAmount(2L);
+        productCreateDto.setPrice(new BigDecimal(24.41));
         productCreateDto.setImageUrlList(Arrays.asList("http://foo.bar/1.png", "http://foo.bar/323.png"));
-
+        // todo add mainImageUrl
 
         mockMvc.perform(
             post("/product")
