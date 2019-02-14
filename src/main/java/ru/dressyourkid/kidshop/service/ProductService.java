@@ -12,9 +12,11 @@ import ru.dressyourkid.kidshop.entity.ProductMeta;
 import ru.dressyourkid.kidshop.entity.ProductStore;
 import ru.dressyourkid.kidshop.model.ProductCreateDto;
 import ru.dressyourkid.kidshop.model.ProductDto;
+import ru.dressyourkid.kidshop.model.product.ProductStoreStatus;
 import ru.dressyourkid.kidshop.repository.ProductMetaRepository;
 import ru.dressyourkid.kidshop.repository.ProductStoreRepository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,9 +76,14 @@ public class ProductService {
 //        List<ProductStore> productStores = productStoreRepository.findByProductMetaId(product.getId()).orElse(Collections.emptyList());
         List<ProductStore> productStores = productMeta.getProductStores();
 
-        Optional<ProductStore> firstProductStore = productStores.stream().findFirst();
-        product.setExists(firstProductStore.isPresent());
-        product.setPrice(firstProductStore.map(ProductStore::getPrice).orElse(null));
+        List<ProductStore> freeProductStores = productStores
+                .stream()
+                .filter((store) -> store.getStatus() == ProductStoreStatus.FREE)
+                .collect(Collectors.toList());
+        boolean hasFreeStoreItems = freeProductStores.size() > 0;
+        product.setExists(hasFreeStoreItems);
+        BigDecimal price = freeProductStores.stream().findFirst().map(ProductStore::getPrice).orElse(null);
+        product.setPrice(price);
         if (productMeta.getProductImage() != null) {
             product.setImageUrlList(
                     productMeta.getProductImage()
@@ -103,6 +110,7 @@ public class ProductService {
                 ProductStore productStore = new ProductStore();
                 productStore.setPrice(productDto.getPrice());
                 productStore.setProductMeta(productMeta);
+                productStore.setStatus(ProductStoreStatus.FREE);
                 stores.add(productStore);
             }
             productMeta.setProductStores(stores);

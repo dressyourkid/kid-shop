@@ -1,8 +1,9 @@
 package ru.dressyourkid.kidshop.entity;
 
+import ru.dressyourkid.kidshop.model.product.ProductStoreStatus;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Сущность склада
@@ -15,14 +16,17 @@ public class ProductStore {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(nullable = false)
     private ProductMeta productMeta;
 
     @ManyToOne(targetEntity = Discount.class)
     private Discount discount;
 
-    @Column(precision = 12, scale = 2)
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
+
+    @Column(nullable = false)
+    private ProductStoreStatus status;
 
     public ProductStore() {
     }
@@ -61,5 +65,13 @@ public class ProductStore {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public ProductStoreStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProductStoreStatus status) {
+        this.status = status;
     }
 }
