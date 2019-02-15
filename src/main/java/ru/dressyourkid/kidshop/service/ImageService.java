@@ -1,13 +1,13 @@
 package ru.dressyourkid.kidshop.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import com.cloudinary.*;
 import ru.dressyourkid.kidshop.controller.exception.UploadException;
 import ru.dressyourkid.kidshop.model.ImageDto;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,8 +27,8 @@ public class ImageService {
                     ObjectUtils.asMap("transformation",
                             new Transformation()
                                     .crop("limit")
-                                    .width(1920)
-                                    .height(1080)
+                                    .width(360)
+                                    .height(640)
                     )
             );
             // create image link in db
