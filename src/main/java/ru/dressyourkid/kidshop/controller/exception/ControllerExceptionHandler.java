@@ -19,6 +19,13 @@ public class ControllerExceptionHandler {
         return new ErrorMessage(HttpStatus.NOT_FOUND.value(), exception.getMessage());
     }
 
+    @ExceptionHandler({ InvalidOrderDataException.class })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Object badRequestHandler(InvalidOrderDataException exception) {
+        // todo custom error message
+        return new ErrorMessage(0, "pipka");
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Object internalErrorsHandler(Exception exception) {

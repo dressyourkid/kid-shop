@@ -43,6 +43,14 @@ oauth2:
     resource:
       userInfoUri: https://graph.facebook.com/me
 
+notification:
+  email:
+    sender:
+    password:
+    smtpHost: smtp.yandex.ru
+    smtpPort: 465
+    defaultEmailList: levas1992@gmail.com
+
 logging:
   level:
     org.springframework: ERROR

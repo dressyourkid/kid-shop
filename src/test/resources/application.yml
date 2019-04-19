@@ -14,3 +14,10 @@ spring:
         trace: false
       path: /h2-console
   jackson.serialization.indent_output: true
+
+notification:
+  email:
+    sender: test
+    password: test
+    smtpHost: test.ru
+    smtpPort: 465

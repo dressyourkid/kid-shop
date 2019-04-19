@@ -103,6 +103,8 @@ dependencies {
 	compile('org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE')
 	compile("org.postgresql:postgresql:$postgresqlDriverVersion")
 	compile('com.cloudinary:cloudinary-http44:1.22.0')
+//	compile('javax.mail:javax.mail-api:1.6.2')
+	compile('com.sun.mail:javax.mail:1.6.2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.security:spring-security-test')
 	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
